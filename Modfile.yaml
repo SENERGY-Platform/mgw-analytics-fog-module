@@ -58,3 +58,27 @@ configs:
     userInput:
       type: int
       name: Timeout between retries to start operator
+
+  dataDirectory:
+    value: /data
+    targets:
+      - refVar: DATA_DIR
+        services:
+          - fog-master
+          - fog-agent
+
+secrets:
+# TODO: login data at connector
+  auth:
+    type: basic-auth
+    targets:
+      - refVar: USERNANE
+        item: username
+        services:
+          - fog-master # TODO connector
+      - refVar: PASSWORD
+        item: password
+        services:
+          - fog-master # TODO connector
+    userInput:
+      name: Auth Credentials
