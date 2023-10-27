@@ -38,7 +38,7 @@ dependencies:
 
 configs:
   retriesOperatorStart:
-    dataType: number
+    dataType: int
     value: 
     targets:
       - refVar: RETRIES_START_OPERATOR
@@ -49,7 +49,7 @@ configs:
       name: Number of retries to start operator
 
   retryTimeoutOperatorStart:
-    dataType: number
+    dataType: int
     value: 
     targets:
       - refVar: TIMEOUT_START_OPERATOR
