@@ -2,7 +2,7 @@ modfileVersion: "v1"
 id: github.com/SENERGY-Platform/mgw-analytics-fog-module
 name: Analytics Fog
 description: Analytics-Fog enables the gateway to start analytics pipelines on the device. It also controls the data sharing with the cloud.
-version: v1.1.1
+version: v1.1.2
 type: add-on
 tags:
   - analytics
@@ -65,6 +65,7 @@ configs:
 
   platformBrokerPort:
     dataType: int
+    value: 2883
     targets:
       - refVar: PLATFORM_BROKER_PORT
         services:
@@ -75,7 +76,7 @@ configs:
 
   platformBrokerHost:
     dataType: string
-    value: 
+    value: "connector.senergy.infai.org"
     targets:
       - refVar: PLATFORM_BROKER_HOST
         services:
@@ -86,6 +87,7 @@ configs:
 
   keycloakUrl:
     dataType: string
+    value: "https://auth.senergy.infai.org/auth"
     targets:
       - refVar: KEYCLOAK_URL
         services:
@@ -94,18 +96,6 @@ configs:
       type: text
       name: URL to keycloak
 
-  dataDir:
-    dataType: string
-    value: /data
-    targets:
-      - refVar: DATA_DIR
-        services:
-          - fog-master
-          - fog-agent
-    userInput:
-      type: text
-      name: Path to the data volume inside the container
-  
   fogBrokerPort:
     dataType: int
     value: 1883
