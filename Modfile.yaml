@@ -2,7 +2,7 @@ modfileVersion: "v1"
 id: github.com/SENERGY-Platform/mgw-analytics-fog-module
 name: Analytics Fog
 description: Analytics-Fog enables the gateway to start analytics pipelines on the device. It also controls the data sharing with the cloud.
-version: v1.1.4
+version: v1.1.6
 type: add-on
 tags:
   - analytics
@@ -11,7 +11,7 @@ deploymentType: single
 services:
   fog-agent:
     name: Fog Agent
-    image: ghcr.io/senergy-platform/analytics-fog-agent:v1.0.5
+    image: ghcr.io/senergy-platform/analytics-fog-agent:v1.0.6
   fog-master:
     name: Fog Master
     image: ghcr.io/senergy-platform/analytics-fog-master:v1.0.5
@@ -19,6 +19,23 @@ services:
     name: Fog Connector
     image: ghcr.io/senergy-platform/analytics-fog-connector:v1.0.6
 
+inputGroups:
+  log-settings:
+    name: Logging
+  cloud-settings:
+    name: Cloud settings
+  cloud-auth:
+    name: Authentication
+    group: cloud-settings
+  cloud-mqtt:
+    name: MQTT
+    group: cloud-settings
+  cloud-api:
+    name: APIs
+    group: cloud-settings
+  local-settings:
+    name: Local settings
+  
 volumes:
   master-data: 
     - mountPoint: /data
@@ -51,6 +68,7 @@ configs:
     userInput:
       type: number
       name: Number of retries to start operator
+      group: local-settings
 
   retryTimeoutOperatorStart:
     dataType: int
@@ -62,6 +80,7 @@ configs:
     userInput:
       type: number
       name: Timeout between retries to start operator
+      group: local-settings
 
   platformBrokerPort:
     dataType: int
@@ -73,6 +92,7 @@ configs:
     userInput:
       type: number
       name: Port of the platform mqtt broker
+      group: cloud-mqtt
 
   platformBrokerHost:
     dataType: string
@@ -84,6 +104,7 @@ configs:
     userInput:
       type: text
       name: Hostname of the platform mqtt broker
+      group: cloud-mqtt
 
   keycloakUrl:
     dataType: string
@@ -95,6 +116,7 @@ configs:
     userInput:
       type: text
       name: URL to keycloak
+      group: cloud-api
 
   fogBrokerPort:
     dataType: int
@@ -107,6 +129,7 @@ configs:
     userInput:
       type: number
       name: Port of the local mqtt broker
+      group: local-settings
 
   clientID:
     dataType: string
@@ -118,6 +141,7 @@ configs:
     userInput:
       type: text
       name: Client ID for auth
+      group: cloud-auth
 
 secrets:
   auth:
@@ -133,3 +157,4 @@ secrets:
           - fog-connector 
     userInput:
       name: Auth Credentials
+      group: cloud-auth
