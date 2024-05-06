@@ -2,7 +2,7 @@ modfileVersion: "v1"
 id: github.com/SENERGY-Platform/mgw-analytics-fog-module
 name: Analytics Fog
 description: Analytics-Fog enables the gateway to start analytics pipelines on the device. It also controls the data sharing with the cloud.
-version: v1.1.8
+version: v1.1.9
 type: add-on
 tags:
   - analytics
@@ -18,6 +18,10 @@ services:
   fog-connector:
     name: Fog Connector
     image: ghcr.io/senergy-platform/analytics-fog-connector:v1.0.6
+
+auxServices:
+  operator:
+    name: Analytics-Operator
 
 inputGroups:
   log-settings:
