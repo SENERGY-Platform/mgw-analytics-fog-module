@@ -2,7 +2,7 @@ modfileVersion: "v1"
 id: github.com/SENERGY-Platform/mgw-analytics-fog-module
 name: Analytics Fog
 description: Analytics-Fog enables the gateway to start analytics pipelines on the device. It also controls the data sharing with the cloud.
-version: v1.1.27
+version: v1.1.28
 type: add-on
 tags:
   - analytics
@@ -11,7 +11,7 @@ deploymentType: single
 services:
   fog-agent:
     name: Fog Agent
-    image: ghcr.io/senergy-platform/analytics-fog-agent:v1.0.12
+    image: ghcr.io/senergy-platform/analytics-fog-agent:v1.0.13
   fog-master:
     name: Fog Master
     image: ghcr.io/senergy-platform/analytics-fog-master:v1.0.6
@@ -43,6 +43,9 @@ inputGroups:
     name: Local settings
   agent-settings:
     name: Agent
+    group: local-settings
+  master-settings:
+    name: Master
     group: local-settings
   
 volumes:
@@ -76,7 +79,7 @@ configs:
           - fog-agent
     userInput:
       type: number
-      name: Timeout unitl operator needs to be startet/stopped
+      name: Timeout until operator needs to be started/stopped
       group: agent-settings
 
   retriesOperatorStart:
@@ -89,7 +92,7 @@ configs:
     userInput:
       type: number
       name: Number of retries to start operator
-      group: local-settings
+      group: master-settings
 
   debug:
     dataType: string
@@ -110,7 +113,7 @@ configs:
 
   retryTimeoutOperatorStart:
     dataType: int
-    value: 10
+    value: 60
     targets:
       - refVar: TIMEOUT_START_OPERATOR
         services:
@@ -118,7 +121,7 @@ configs:
     userInput:
       type: number
       name: Timeout between retries to start operator
-      group: local-settings
+      group: master-settings
 
   platformBrokerPort:
     dataType: int
