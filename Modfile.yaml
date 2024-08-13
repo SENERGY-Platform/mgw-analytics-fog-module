@@ -2,7 +2,7 @@ modfileVersion: "v1"
 id: github.com/SENERGY-Platform/mgw-analytics-fog-module
 name: Analytics Fog
 description: Analytics-Fog enables the gateway to start analytics pipelines on the device. It also controls the data sharing with the cloud.
-version: v2.0.9
+version: v2.0.10
 type: add-on
 tags:
   - analytics
@@ -112,6 +112,32 @@ configs:
     userInput:
       type: text
       name: Debug mode
+      group: local-settings
+
+  data_dir:
+    dataType: string
+    value: "/data"
+    targets:
+      - refVar: DATA_DIR
+        services:
+          - fog-master
+          - fog-agent
+    userInput:
+      type: text
+      name: Data Directory
+      group: local-settings
+
+  db_path:
+    dataType: string
+    value: "/data/sqlite.db"
+    targets:
+      - refVar: DATABASE_PATH
+        services:
+          - fog-master
+          - fog-agent
+    userInput:
+      type: text
+      name: Path to Database
       group: local-settings
 
   platformBrokerPort:
